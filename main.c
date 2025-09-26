@@ -84,7 +84,7 @@ static const char *find_geometry(int argc, char *const argv[])
         if (!arg) {
             continue;
         }
-        if (strcmp(arg, "--geometry") == 0) {
+        if (strcmp(arg, "--geometry") == 0 || strcmp(arg, "-geometry") == 0) {
             if (i + 1 < argc) {
                 return argv[i + 1];
             }
@@ -92,6 +92,9 @@ static const char *find_geometry(int argc, char *const argv[])
         }
         if (strncmp(arg, "--geometry=", 11) == 0) {
             return arg + 11;
+        }
+        if (strncmp(arg, "-geometry=", 10) == 0) {
+            return arg + 10;
         }
     }
     return NULL;
