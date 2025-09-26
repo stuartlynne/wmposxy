@@ -3,6 +3,9 @@
  *
  * Inspired by wmctrl; authored by Stuart Lynne with ChatGPT assistance.
  *
+ * Copyright (C) 2025 Stuart Lynne
+ * Contact: stuart.lynne@gmail.com
+ *
  * GNU GPL v2 or later.
  */
 
