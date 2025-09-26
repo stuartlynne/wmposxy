@@ -1,5 +1,6 @@
 PREFIX ?= /usr/local
 DESTDIR ?=
+MANPREFIX ?= $(PREFIX)/share/man
 
 CC ?= gcc
 PKG_CONFIG ?= pkg-config
@@ -13,6 +14,7 @@ override LIBS += $(X11_LIBS)
 
 TARGET := wmposxy
 SRC := main.c
+MANPAGE := wmposxy.1
 
 all: $(TARGET)
 
@@ -22,9 +24,12 @@ $(TARGET): $(SRC)
 install: $(TARGET)
 	install -d $(DESTDIR)$(PREFIX)/bin
 	install -m 755 $(TARGET) $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	install -d $(DESTDIR)$(MANPREFIX)/man1
+	install -m 644 $(MANPAGE) $(DESTDIR)$(MANPREFIX)/man1/$(MANPAGE)
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	rm -f $(DESTDIR)$(MANPREFIX)/man1/$(MANPAGE)
 
 clean:
 	rm -f $(TARGET)

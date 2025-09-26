@@ -1,0 +1,71 @@
+.TH WMPOSXY 1 "September 2025" "wmposxy" "User Commands"
+.SH NAME
+wmposxy \- honour X11 --geometry positions under Wayland via XWayland
+.SH SYNOPSIS
+.B wmposxy
+.I program
+.RI [ args ...]
+.SH DESCRIPTION
+The
+.B wmposxy
+utility launches an X11 client (typically running under XWayland) and
+repositions the resulting top-level window according to the positional
+portion of the client's
+.IR --geometry 
+argument.
+.PP
+Wayland compositors usually ignore client-supplied coordinates, honouring
+only width/height hints.  This wrapper restores the classic X11 behaviour
+by watching for the client's window, then issuing an
+.B _NET_MOVERESIZE_WINDOW
+request (falling back to
+.B XMoveWindow
+when necessary).  Width and height are left unchanged; only the
+X/Y origin is updated.  Negative offsets are interpreted relative to the
+right/bottom edges using the window's current size.
+.SH OPTIONS
+The wrapper understands the following options before the program name:
+.TP
+.BR -h , \ --help
+Print usage information and exit.
+.PP
+All other arguments are forwarded unchanged to
+.IR program .
+The program must supply a
+.BR --geometry
+(or
+.BR -geometry )
+token in either split form ("--geometry 80x24+0+0") or joined form
+("--geometry=80x24+0+0").  If the token is not present, the wrapper
+exits with an error and does not launch the client.
+.SH ENVIRONMENT
+.TP
+.B DISPLAY
+X11 display to connect to.  If no display is available the wrapper
+terminates with an error.
+.TP
+.B WAYLAND_DISPLAY
+Used only to detect Wayland sessions; the wrapper requires an X11/XWayland
+bridge to perform repositioning.
+.SH EXIT STATUS
+.TP
+.B 0
+Success.  On systems without XWayland the wrapper launches the child
+process and exits without repositioning.
+.TP
+.B >0
+An error occurred (missing geometry token, unable to open the X display,
+child exited before creating a window, etc.).
+.SH SEE ALSO
+.BR wmctrl (1),
+.BR xterm (1),
+.BR konsole (1)
+.SH SECURITY
+Allowing arbitrary window repositioning reintroduces spoofing
+possibilities that Wayland deliberately removed.  A malicious client could
+place a fake password dialog over a legitimate one.  Use this tool only on
+trusted systems.
+.SH AUTHORS
+Stuart Lynne and ChatGPT, inspired by the
+.B wmctrl
+utility.
