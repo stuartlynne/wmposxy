@@ -105,8 +105,23 @@ static Atom atom_net_client_list_stacking;
 static Atom atom_net_wm_pid;
 static Atom atom_net_moveresize;
 
+static int xerr_ignore_badwindow(Display *d, XErrorEvent *e)
+{
+    if (e->error_code == BadWindow) {
+        return 0;
+    }
+    char buf[256];
+    XGetErrorText(d, e->error_code, buf, sizeof(buf));
+    fprintf(stderr, "wmposxy: X error: %s (opcode=%d resource=0x%lx)\n",
+            buf, e->request_code, e->resourceid);
+    return 0;
+}
+
 static bool get_window_pid(Display *disp, Window win, pid_t *pid_out)
 {
+    if (win == None) {
+        return false;
+    }
     unsigned char *prop = NULL;
     Atom actual_type;
     int actual_format;
@@ -185,6 +200,9 @@ static bool lookup_window_by_pid(Display *disp, pid_t target_pid, Window *out_wi
         unsigned long count = 0;
         if (get_window_list(disp, atom_net_client_list, &list, &count)) {
             for (unsigned long i = 0; i < count; ++i) {
+                if (list[i] == None) {
+                    continue;
+                }
                 pid_t pid;
                 if (get_window_pid(disp, list[i], &pid) && pid == target_pid) {
                     *out_win = list[i];
@@ -201,6 +219,9 @@ static bool lookup_window_by_pid(Display *disp, pid_t target_pid, Window *out_wi
         unsigned long count = 0;
         if (get_window_list(disp, atom_net_client_list_stacking, &list, &count)) {
             for (unsigned long i = 0; i < count; ++i) {
+                if (list[i] == None) {
+                    continue;
+                }
                 pid_t pid;
                 if (get_window_pid(disp, list[i], &pid) && pid == target_pid) {
                     *out_win = list[i];
@@ -359,6 +380,8 @@ int main(int argc, char *argv[])
     atom_net_client_list_stacking = XInternAtom(disp, "_NET_CLIENT_LIST_STACKING", True);
     atom_net_wm_pid = XInternAtom(disp, "_NET_WM_PID", False);
     atom_net_moveresize = XInternAtom(disp, "_NET_MOVERESIZE_WINDOW", True);
+
+    XSetErrorHandler(xerr_ignore_badwindow);
 
     Window win = None;
     if (!wait_for_window(disp, child, &win, 8000)) {
