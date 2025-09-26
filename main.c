@@ -336,8 +336,20 @@ int main(int argc, char *argv[])
 
     Display *disp = XOpenDisplay(NULL);
     if (!disp) {
-        fprintf(stderr, "wmposxy: unable to open X display\n");
+        fprintf(stderr, "wmposxy: unable to open X display; requires Xorg/XWayland.\n");
         return EXIT_FAILURE;
+    }
+
+    int xwayland_opcode, xwayland_event, xwayland_error;
+    Bool have_xwayland = XQueryExtension(disp, "XWAYLAND",
+                                         &xwayland_opcode,
+                                         &xwayland_event,
+                                         &xwayland_error);
+
+    if (!have_xwayland) {
+        XCloseDisplay(disp);
+        /* No XWayland; just let the child run without repositioning. */
+        return EXIT_SUCCESS;
     }
 
     atom_net_client_list = XInternAtom(disp, "_NET_CLIENT_LIST", True);
