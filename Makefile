@@ -8,6 +8,10 @@ PKG_CONFIG ?= pkg-config
 X11_CFLAGS := $(shell $(PKG_CONFIG) --cflags x11 2>/dev/null)
 X11_LIBS := $(shell $(PKG_CONFIG) --libs x11 2>/dev/null)
 
+ifeq ($(strip $(X11_LIBS)),)
+X11_LIBS := -lX11
+endif
+
 override CFLAGS += -O2 -Wall -Wextra -pedantic -std=c11 $(X11_CFLAGS)
 override LDFLAGS +=
 override LIBS += $(X11_LIBS)
