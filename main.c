@@ -33,7 +33,7 @@ static void usage(const char *prog)
             "requested coordinates. The program must include a --geometry WxH+X+Y token.\n\n"
             "Usage: %s <program> [args...]\n\n"
             "Example:\n"
-            "  %s konsole --geometry 124x48+0+840 -- ssh user@host\n",
+            "  %s konsole --geometry 1200x600+0+840 -- ssh user@host\n",
             prog, prog);
 }
 
