@@ -12,8 +12,12 @@ ifeq ($(strip $(X11_LIBS)),)
 X11_LIBS := -lX11
 endif
 
-override CFLAGS += -O2 -Wall -Wextra -pedantic -std=c11 $(X11_CFLAGS)
+WMCTRLNG_DIR := ../wmctrlng
+WMCTRLNG_LIB := $(WMCTRLNG_DIR)/lib/libwmctrl.a
+
+override CFLAGS += -O2 -Wall -Wextra -pedantic -std=c11 $(X11_CFLAGS) -I$(WMCTRLNG_DIR)/lib/include
 override LDFLAGS +=
+override LIBS += $(WMCTRLNG_LIB)
 override LIBS += $(X11_LIBS)
 
 TARGET := wmposxy
@@ -22,7 +26,10 @@ MANPAGE := wmposxy.1
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
+$(WMCTRLNG_LIB):
+	$(MAKE) -C $(WMCTRLNG_DIR)/lib
+
+$(TARGET): $(SRC) $(WMCTRLNG_LIB)
 	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) $(LIBS) -o $@
 
 install: $(TARGET)
