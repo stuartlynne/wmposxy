@@ -1,0 +1,56 @@
+sl@whiskey:/home/sl/work25/qlmux/qlmux_proxy
+[3:3] % qlmux -a -4
+Host 'whiskey' appears local; running as current user.
+Running: xrandr --query
+Closing Konsole window 0x05800011 (sl@whiskey:/home/sl/work25/qlmux/qlmux_proxy (develop) — Konsole)
+Closing Konsole window 0x03800011 (sl@whiskey:/home/sl/work25/qlmux/qlmux_proxy (develop) — Konsole)
+Closing Konsole window 0x05a00011 (sl@whiskey:/home/sl/work25/qlmux/qlmux_proxy (develop) — Konsole)
+Closing Konsole window 0x04800011 (sl@whiskey:/home/sl/work25/qlmux/qlmux_proxy (develop) — Konsole)
+Launching via wmposxy: wmposxy konsole --separate --profile SSH-NoMenu --qwindowtitle slot-A-142187-38203 --workdir /home/sl/work25/qlmux/qlmux_proxy --geometry 1200x900+0+1200 -p TerminalColumns=124 -p TerminalRows=48
+Launching via wmposxy: wmposxy konsole --separate --profile SSH-NoMenu --qwindowtitle slot-B-142187-38204 --workdir /home/sl/work25/qlmux/qlmux_proxy --geometry 1200x900+720+1200 -p TerminalColumns=124 -p TerminalRows=48
+Launching via wmposxy: wmposxy konsole --separate --profile SSH-NoMenu --qwindowtitle slot-C-142187-38205 --workdir /home/sl/work25/qlmux/qlmux_proxy --geometry 1200x900+0+1500 -p TerminalColumns=124 -p TerminalRows=48
+wmposxy: launched pid 142213, waiting for window...
+Launching via wmposxy: wmposxy konsole --separate --profile SSH-NoMenu --qwindowtitle slot-D-142187-38206 --workdir /home/sl/work25/qlmux/qlmux_proxy --geometry 1200x900+720+1500 -p TerminalColumns=124 -p TerminalRows=48
+wmposxy: launched pid 142215, waiting for window...
+wmposxy: launched pid 142216, waiting for window...
+wmposxy: launched pid 142217, waiting for window...
+wmposxy: connected to X display ':0'
+wmposxy: XWayland extension not found; continuing under X11
+wmposxy: waiting up to 8s for window of pid 142213...
+wmposxy: connected to X display ':0'
+wmposxy: XWayland extension not found; continuing under X11
+wmposxy: waiting up to 8s for window of pid 142215...
+wmposxy: connected to X display ':0'
+wmposxy: XWayland extension not found; continuing under X11
+wmposxy: waiting up to 8s for window of pid 142216...
+wmposxy: connected to X display ':0'
+wmposxy: XWayland extension not found; continuing under X11
+wmposxy: waiting up to 8s for window of pid 142217...
+Sun Oct 12 16:30:38 (develop)
+sl@whiskey:/home/sl/work25/qlmux/qlmux_proxy
+[4:4] % wmposxy: moved window 0x6c00011 to 01500
+wmposxy: clearing attention flags on 0x6c00011 (debug=0)
+wmposxy: moved window 0x5800011 to 7201200
+wmposxy: clearing attention flags on 0x5800011 (debug=0)
+wmposxy: moved window 0x3c00011 to 01200
+wmposxy: clearing attention flags on 0x3c00011 (debug=0)
+wmposxy: moved window 0x6a00011 to 7201500
+wmposxy: clearing attention flags on 0x6a00011 (debug=0)
+WID=60817425  ---  --- 
+WID=98566161  ---  --- 
+WID=67108881  ---  --- 
+WID=100663313  ---  DEMATTN 
+WID=106954769  ---  --- 
+WID=109051921  ---  --- 
+WID=96469009  ---  --- 
+WID=71303185  ---  DEMATTN 
+WID=50331665  ---  DEMATTN 
+WID=102760465  ---  DEMATTN 
+WID=104857617  ---  --- 
+WID=90177553  ---  --- 
+WID=125829137  ---  --- 
+WID=92274705  ---  DEMATTN 
+WID=62914577  ---  --- 
+WID=113246225  ---  --- 
+WID=111149073  ---  --- 
+WID=134217745  ---  --- 
